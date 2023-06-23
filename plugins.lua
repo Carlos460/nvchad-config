@@ -4,13 +4,12 @@ local overrides = require "custom.configs.overrides"
 local plugins = {
 
   -- Override plugin definition options
-
-  {
+{
     "neovim/nvim-lspconfig",
     dependencies = {
-      -- format & linting
       {
         "jose-elias-alvarez/null-ls.nvim",
+        ft = "go",
         config = function()
           require "custom.configs.null-ls"
         end,
@@ -21,7 +20,7 @@ local plugins = {
       require "custom.configs.lspconfig"
     end, -- Override to setup mason-lspconfig
   },
-
+  -- format & linting
   -- override plugin configs
   {
     "williamboman/mason.nvim",
@@ -49,13 +48,40 @@ local plugins = {
       require("better_escape").setup()
     end,
   },
+
   {
     "christoomey/vim-tmux-navigator",
     lazy = false,
   },
+
   {
     "mfussenegger/nvim-dap",
     lazy = false,
+    config = function()
+      require("custom.configs.nvim-dap")
+    end,
+  },
+
+  {
+    "rcarriga/nvim-dap-ui",
+    lazy = false,
+    dependencies = {
+      "mfussenegger/nvim-dap"
+    },
+  },
+
+  {
+    'folke/neodev.nvim',
+    lazy = false,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = function ()
+      require("nvim-treesitter.install").update({with_sync = true})
+    end,
+    opts = {
+      ensure_installed = {"go"},
+    }
   }
   -- To make a plugin not be loaded
   -- {
