@@ -5,9 +5,9 @@ local M = {}
 local highlights = require "custom.highlights"
 
 M.ui = {
-  theme = "nightfox",
-  theme_toggle = { "nightfox", "one_light" },
-  transparency = true,
+  theme = "gruvbox",
+  theme_toggle = { "gruvbox", "one_light" },
+  transparency = false,
 
   hl_override = highlights.override,
   hl_add = highlights.add,
