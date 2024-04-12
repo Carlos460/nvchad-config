@@ -4,7 +4,7 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local lspconfig = require "lspconfig"
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "tsserver", "clangd", "tailwindcss", "gopls" }
+local servers = {"omnisharp", "html", "cssls", "tsserver", "clangd", "tailwindcss", "gopls" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -15,6 +15,12 @@ end
 
 
 local util = require("lspconfig/util")
+
+local pid = vim.fn.getpid()
+
+lspconfig.omnisharp.setup{
+  cmd = {"/Users/carlos/.local/share/nvim/mason/packages/omnisharp/omnisharp", "--languageserver", "--hostPID", tostring(pid)},
+}
 
 lspconfig.gopls.setup{
   on_attach = on_attach,
